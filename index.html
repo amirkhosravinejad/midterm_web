@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link rel="stylesheet" type="text/css" href="divs.css">
+</head>
+<body>
+    
+  <link rel="stylesheet" type="text/css" href="back_img.css">
+  <h1>سلام به گیتهاب خوش آمدید</h1>
+  
+  <div class="maindiv">
+
+    <div class="left">
+        <img src="self_me.jpg" alt="loading" id="user_img">
+        <span class="details">
+            <p id="name">Amir Khosravinejad</p>
+            <a id="blog" href="http://www.google.com">http://www.google.com</a>
+            <p id="region">Tehran, Iran</p>
+        </span>
+        <div class="Bio" id="bio">
+            <p>Amirkabir Student</p>
+            <p>Computer Engineering</p>
+        </div>
+    </div>
+    <div class="right">
+        <form class="gitForm">
+            <input type="text" id="githubID"><br>
+            <button id="submitButton" type="button">Submit</button>
+        </form>
+        <p id="demo">default</p>
+        
+    </div>
+  </div>
+  <script>
+    const element = document.getElementById("submitButton");
+    const username = document.getElementById("name");
+    const blog_get = document.getElementById("blog");
+    const image_ = document.getElementById("user_img");
+    //const location = document.getElementById("region");
+    element.addEventListener("click", function() {
+        // var first = "https://api.github.com/users/";
+        var uid = document.getElementById("githubID").value;
+        var url = "https://api.github.com/users/".concat(uid);
+        fetch(url)
+            .then(res => res.json())
+            .then((out) => {
+        username.innerHTML = out["name"];
+        blog_get.innerHTML = out["blog"];
+        blog_get.href = out["blog"];
+        image_.src = out["avatar_url"];
+        const location_ = document.getElementById("region");
+        location_.innerHTML = out["location"];
+            }).catch(err => console.error(err));
+    });
+  </script>
+
+</body>
+</html>
