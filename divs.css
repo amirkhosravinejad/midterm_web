@@ -19,7 +19,7 @@
 .left{
     display: inline-block;
     background-color: gold;
-    width: fit-content;
+    width: 10cm;
     border-radius: 5px;
 }
 
@@ -31,7 +31,7 @@
     background-color: gold;
     display: inline-block;
     position: relative;
-    top: -95px;
+    top: -80px;
     padding-right: 3px;
     width: fit-content; 
     height: 10cm;

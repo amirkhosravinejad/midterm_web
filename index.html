@@ -19,8 +19,7 @@
             <p id="region">Tehran, Iran</p>
         </span>
         <div class="Bio" id="bio">
-            <p>Amirkabir Student</p>
-            <p>Computer Engineering</p>
+            <p>Amirkabir Student<br>Computer Engineering</p>
         </div>
     </div>
     <div class="right">
@@ -32,27 +31,7 @@
         
     </div>
   </div>
-  <script>
-    const element = document.getElementById("submitButton");
-    const username = document.getElementById("name");
-    const blog_get = document.getElementById("blog");
-    const image_ = document.getElementById("user_img");
-    //const location = document.getElementById("region");
-    element.addEventListener("click", function() {
-        // var first = "https://api.github.com/users/";
-        var uid = document.getElementById("githubID").value;
-        var url = "https://api.github.com/users/".concat(uid);
-        fetch(url)
-            .then(res => res.json())
-            .then((out) => {
-        username.innerHTML = out["name"];
-        blog_get.innerHTML = out["blog"];
-        blog_get.href = out["blog"];
-        image_.src = out["avatar_url"];
-        const location_ = document.getElementById("region");
-        location_.innerHTML = out["location"];
-            }).catch(err => console.error(err));
-    });
+  <script src="firstscript.js">
   </script>
 
 </body>
