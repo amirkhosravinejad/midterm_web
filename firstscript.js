@@ -4,27 +4,36 @@ const element = document.getElementById("submitButton");
     const image_ = document.getElementById("user_img");
     const bio_ID = document.getElementById("bio");
     const location_ = document.getElementById("region");
+   
     //localStorage.clear();
-    if (localStorage.length == 0){
+    if (localStorage.length === 0){
         var dict = {'name': 'amirkhosravinejad', 'blog': "", 'avatar_url': "https://avatars.githubusercontent.com/u/70014539?v=4",
         'bio': null, 'location': null};
         localStorage.setItem("1", JSON.stringify(dict));
     }  
     else{
-        for (const key in localStorage) {
+        for (const key in localStorage)
             console.log(`${key}: ${localStorage.getItem(key)}`);
-        }
-    }  
+    } 
+    // on click buttonlistener which first checks the username can
+    // be found on github (check_validity function) and if it is
+    // valid, the next function (check_localStorage_find) is called
+    // in order to check localStorage and maybe the api to find and  
+    // show the details of the github profile which is needed.
     element.addEventListener("click", function() {
+        //check_validity(uid);
         check_localStorage_find();
     });
 
     function check_localStorage_find(){
-        var inLocal = false;
         var uid = document.getElementById("githubID").value;
-        for (const profile_number in localStorage) {
+        var inLocal = false;
+        //console.log(uid);
+        for (let profile_number in localStorage) {
+            if (isNaN(profile_number))
+                continue;
             var profile = JSON.parse(localStorage.getItem(profile_number));
-            console.log(`salam${profile.name}`);
+            //console.log(`salam ${profile_number}`);
             if (profile["name"] === uid){
                 inLocal = true;
                 username.innerHTML = profile["name"];
@@ -41,11 +50,27 @@ const element = document.getElementById("submitButton");
         }
         if (!inLocal){
             var url = "https://api.github.com/users/".concat(uid);
-            fetch(url)
-            .then(res => res.json())
-            .then((out) => {
-                check_null_and_set(out);
-            }).catch(err => console.error(err));
+            // fetch(url)
+            // .then(res => res.json())
+            // .then((out) => {
+            //     check_null_and_set(out);
+            // }).catch(err => console.error(err));
+            try{
+                var res = fetch(url);
+                    if (res.status === 404) {
+                        console.log("ridi dabsh");
+                    }
+                else {
+                    res.then(res => res.json())
+                    .then((out) => {
+                        check_null_and_set(out);
+                    }).catch(err => console.error(err));
+                }
+            }
+            catch{
+                console.log("pain");
+            }
+            //makeRequest(url);
         }
     }
 
