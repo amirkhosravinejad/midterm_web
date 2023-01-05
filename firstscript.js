@@ -1,14 +1,15 @@
-const element = document.getElementById("submitButton");
+    const element = document.getElementById("submitButton");
     const username = document.getElementById("name");
     const blog_get = document.getElementById("blog");
     const image_ = document.getElementById("user_img");
     const bio_ID = document.getElementById("bio");
     const location_ = document.getElementById("region");
    
-    //localStorage.clear();
+    // localStorage.clear();
     if (localStorage.length === 0){
-        var dict = {'name': 'amirkhosravinejad', 'blog': "", 'avatar_url': "https://avatars.githubusercontent.com/u/70014539?v=4",
-        'bio': null, 'location': null};
+        var dict = {'login':'amirkhosravinejad', 'name': 'Amir Khosravinejad', 'blog': "https://www.linkedin.com/in/amir-khosravinejad-8a2874217?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BJgg%2FvHYQQTeGKVrSgr5aIQ%3D%3D"
+        , 'avatar_url': "https://avatars.githubusercontent.com/u/70014539?v=4", 'bio': 'Current Computer Engineering student at Amirkabir University of Technology'
+        , 'location': 'Tehran'};
         localStorage.setItem("1", JSON.stringify(dict));
     }  
     else{
@@ -34,7 +35,7 @@ const element = document.getElementById("submitButton");
                 continue;
             var profile = JSON.parse(localStorage.getItem(profile_number));
             //console.log(`salam ${profile_number}`);
-            if (profile["name"] === uid){
+            if (profile["login"] === uid){
                 inLocal = true;
                 username.innerHTML = profile["name"];
                 blog_get.innerHTML = profile["blog"];
@@ -50,34 +51,61 @@ const element = document.getElementById("submitButton");
         }
         if (!inLocal){
             var url = "https://api.github.com/users/".concat(uid);
+            load(url);
+            // console.log(uid);
             // fetch(url)
-            // .then(res => res.json())
-            // .then((out) => {
-            //     check_null_and_set(out);
-            // }).catch(err => console.error(err));
-            try{
-                var res = fetch(url);
-                    if (res.status === 404) {
-                        console.log("ridi dabsh");
-                    }
-                else {
-                    res.then(res => res.json())
-                    .then((out) => {
-                        check_null_and_set(out);
-                    }).catch(err => console.error(err));
-                }
-            }
-            catch{
-                console.log("pain");
-            }
+            // .then(res => {
+            //     res.json()
+            //     if (res.status == 404)
+            //         alert_user_not_found()
+            //     })
+            // .then(out =>
+            //     check_null_and_set(out))
+            // .catch(err => { console.log(err) });
+            // var res = fetch(url).then(res.json());
+            // console.log(response);
+            // if (res.message === "Not Found")
+            //     console.log("notfound!");   
+            // else
+            //     check_null_and_set(res);
             //makeRequest(url);
         }
     }
+    async function load(url) {
+        try{
+            let obj = await (await fetch(url)).json();
+            console.log(obj);
+            
+            if (obj.message === "Not Found")
+                alert_user_not_found();
+            else
+                check_null_and_set(obj);        
+        }
+        catch{
+            
+        }
+        
+    }
+    
+
+    function alert_user_not_found(){
+        const alert = document.getElementById("wrong_id");
+        alert.style.color = "red";
+        alert.innerHTML = "Wrong ID!!";
+        alert.style.visibility = "visible";
+        setTimeout(alert_, 2000, alert);
+        
+    }
+
+    function alert_(alert){
+        alert.style.visibility = "hidden";
+    }
 
     function check_null_and_set(out){
+        
         var new_profile = {};
-        if (out["login"] !== null)
-            username.innerHTML = out["login"];
+        if (out["name"] !== null)
+            username.innerHTML = out["name"];
         else
             username.innerHTML = "\t";
         if (out["blog"] !== null){
@@ -100,8 +128,9 @@ const element = document.getElementById("submitButton");
             location_.innerHTML = out["location"];
         else
             location_.innerHTML = "\t";
-        
-        new_profile["name"] = out["login"];  
+
+        new_profile["login"] = out["login"];
+        new_profile["name"] = out["name"];  
         new_profile["blog"] = out["blog"];    
         new_profile["avatar_url"] = out["avatar_url"];    
         new_profile["bio"] = bio_ID.innerHTML;    

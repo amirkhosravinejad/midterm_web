@@ -19,19 +19,22 @@
 .left{
     display: inline-block;
     background-color: gold;
+    overflow: hidden; 
     width: 10cm;
+    /* width: fit-content; */
     border-radius: 5px;
 }
 
 .details{
     display: inline-block;
+    width: 5cm;
 }
 
 .right{
     background-color: gold;
     display: inline-block;
     position: relative;
-    top: -80px;
+    top: -100px;
     padding-right: 3px;
     width: 4.5cm; 
     height: 10cm;
@@ -49,6 +52,7 @@
 
 .bio{
     border: 3px;
+    width: 2cm;
 }
 
 
@@ -59,6 +63,10 @@
 #githubID, #submitButton{
     margin-top: 7px;
     align-content: center;
+}
+
+#wrong_id{
+    visibility: hidden;
 }
 
 img{
