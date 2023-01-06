@@ -1,14 +1,12 @@
 .maindiv {
-    /*display: inline-block; */
-    /* margin: 0; */
-    /* position: absolute; */
-    /* top: 50%; */
-    /* -ms-transform: translateY(-50%); */
-    /* transform: translateY(-50%); */
+    
+    /* we need to center horizontally, so margins from
+    left and right sets */
     margin-left: auto;
-    width: fit-content;
     margin-right: auto;
-    /* right: 50%; */
+    width: fit-content;
+    /* for contrast with background
+    i use a bright color for the div's background-color */
     background-color: wheat;
     height: 10cm;
     border-radius: 3px;
@@ -17,11 +15,13 @@
 }
 
 .left{
+    /* to set images and details inline and in one block*/
     display: inline-block;
     background-color: gold;
+    /* when blog link is long it's better to hide overflowed content */
     overflow: hidden; 
     width: 10cm;
-    /* width: fit-content; */
+    /* width: fit-content;  */
     border-radius: 5px;
 }
 
@@ -32,22 +32,23 @@
 
 .right{
     background-color: gold;
-    display: inline-block;
-    position: relative;
-    top: -100px;
+    display: block;
+    /* to set leftdiv and rightdiv in-line no matter what
+    content they have */
+    float: right;
     padding-right: 3px;
     width: 4.5cm; 
-    height: 10cm;
+    height: 8cm;
     border-radius: 5px;
 }
 
 .gitForm{
-    width: fit-content;
-    height: fit-content;
+    width: 3cm;
+    height: 4cm;
     text-align: center;
-    margin-top: auto;
-    margin-bottom: auto;
-    top: 20px;
+    /* margin-top: auto;
+    margin-bottom: auto; */
+    /* top: 20px; */
 }
 
 .bio{
@@ -55,6 +56,11 @@
     width: 2cm;
 }
 
+.recent_push{
+    background-color: gold;
+    /* text-align: center; */
+    max-width: fit-content;
+}
 
 #name, #blog, #region {
     text-align: center;
@@ -66,6 +72,8 @@
 }
 
 #wrong_id{
+    /* this is a paragraph used for alerting 
+    user that the ID supplied is invalid */
     visibility: hidden;
 }
 
@@ -75,6 +83,7 @@ img{
     width: 2cm;
     height: 2cm;
 }
+
 h1{
     color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif;

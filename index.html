@@ -9,9 +9,9 @@
   <link rel="stylesheet" type="text/css" href="back_img.css">
   <h1>سلام به گیتهاب خوش آمدید</h1>
   
-  <div class="maindiv">
+  <div class="maindiv" id="main">
 
-    <div class="left">
+    <div class="left" id="left-part">
         <img src="self_me.jpg" alt="loading" id="user_img">
         <span class="details">
             <p id="name">Amir Khosravinejad</p>
@@ -21,8 +21,16 @@
         <div class="Bio" id="bio">
             <p>Amirkabir Student<br>Computer Engineering</p>
         </div>
+        <div class="recent_push">
+            <h5>Recent pushes</h5>
+            <p id = "push_1"></p>
+            <p id = "push_2"></p>
+            <p id = "push_3"></p>
+            <p id = "push_4"></p>
+            <p id = "push_5"></p>
+        </div>
     </div>
-    <div class="right">
+    <div class="right" id="right-part">
         <form class="gitForm">
             <input type="text" id="githubID"><br>
             <button id="submitButton" type="button">Submit</button>
@@ -30,6 +38,7 @@
         <p id="wrong_id">default</p>
         
     </div>
+    
   </div>
   <script src="firstscript.js">
   </script>
